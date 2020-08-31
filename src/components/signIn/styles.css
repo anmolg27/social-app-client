@@ -1,0 +1,21 @@
+.signin-heading {
+  text-align: center;
+}
+.signin-container {
+  background-color: rgb(240, 240, 240);
+  margin: 30px auto;
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.signin-button {
+  background-color: rgb(83, 83, 83);
+}
+/* .signin-button:disabled {
+  background-color: grey;
+} */
+.signin-button:hover {
+  background-color: forestgreen;
+  transition: background-color 0.5s;
+}

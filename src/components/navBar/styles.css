@@ -1,0 +1,13 @@
+.log-out-button {
+  background-color: grey;
+}
+.log-out-button:hover {
+  background-color: rgb(146, 0, 0);
+  transition: background-color 0.5s;
+}
+.nav-bar {
+  background-image: linear-gradient(
+    rgba(16, 94, 16, 0.788),
+    rgba(10, 148, 158, 0.329)
+  );
+}

@@ -1,0 +1,133 @@
+.home-container {
+  /* background-color: rgb(240, 240, 240); */
+  margin: 0px auto;
+  padding: 0px 20px;
+  /* margin: 30px auto;
+  padding: 20px; */
+  border-radius: 10px;
+}
+
+.image-input {
+  position: relative;
+  width: 150px;
+}
+.edit-icon {
+  cursor: pointer;
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  font-size: 20px;
+}
+.profile-image {
+  border-radius: 50%;
+}
+.input-image {
+  display: none;
+  cursor: default;
+}
+.profile-details {
+}
+.profile-block {
+  background-color: rgb(240, 240, 240);
+  text-align: -webkit-center;
+  padding: 10px;
+  border-radius: 20px;
+}
+.post-button {
+  width: 80px;
+}
+.input-textarea {
+  border-radius: 20px;
+}
+.input-textarea::-webkit-scrollbar {
+  width: 5px;
+}
+.input-textarea::-webkit-scrollbar-track {
+  background-color: rgba(255, 0, 0, 0);
+}
+
+.input-post {
+  /* margin-left: 10px; */
+  /* background-color: rgb(240, 240, 240); */
+  /* width: 60%; */
+  /* padding: 10px; */
+}
+.post {
+  /* background-color: rgb(240, 240, 240); */
+  /* width: 70%; */
+  background-image: linear-gradient(
+    rgba(0, 255, 0, 0.486),
+    rgba(88, 217, 226, 0.651)
+  );
+  padding: 10px;
+  border-radius: 20px;
+  /* border: inset; */
+  border-color: greenyellow;
+}
+.post-user-image {
+  border-radius: 50%;
+}
+.comment-button {
+  background: none;
+  border: none;
+}
+.name-time {
+  /* float: left; */
+  display: flex;
+  margin-bottom: -15px;
+}
+.time-teller {
+  margin-left: 15px;
+  transform: translateY(2px);
+}
+.loading {
+  display: flex;
+  margin: auto;
+  /* text-align: center; */
+}
+.loading-text {
+  text-align: center;
+}
+.loading-spinner {
+  margin-left: 10px;
+  margin-top: -2px;
+}
+/* ----------------------COMMENTS------------------------- */
+.comment {
+  border-radius: 10px;
+  background-color: rgb(240, 240, 240);
+  margin: 0 auto 10px 10px;
+  padding: 10px;
+}
+
+.comment-name-time {
+  display: flex;
+}
+.comment-post-button:hover {
+  /* color: black; */
+  font-size: 17px;
+  background-color: green;
+  transition: font-size 0.2s;
+}
+.comments-container {
+  padding-left: 0;
+  border-radius: 20px;
+}
+.comments {
+  /* max-height: 50vh; */
+  height: 40vh;
+  overflow-y: scroll;
+}
+.comments::-webkit-scrollbar {
+  width: 0px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  font-size: 30px;
+  color: red;
+  /* outline: none; */
+}

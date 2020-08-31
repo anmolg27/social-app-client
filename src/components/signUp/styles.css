@@ -1,0 +1,17 @@
+.signup-heading {
+  text-align: center;
+}
+.signup-container {
+  background-color: rgb(240, 240, 240);
+  margin: 30px auto;
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+}
+.signup-button {
+  background-color: grey;
+}
+.signup-button:hover {
+  background-color: forestgreen;
+  transition: background-color 0.5s;
+}
