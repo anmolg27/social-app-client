@@ -6,23 +6,18 @@ import history from "../../history";
 import "./styles.css";
 import {
   Collapse,
-  CardBody,
-  Card,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
   Button,
   InputGroup,
   InputGroupText,
   InputGroupAddon,
-  Input,
 } from "reactstrap";
 // redux
 import { connect } from "react-redux";
@@ -41,7 +36,9 @@ const NavBar = (props) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   useEffect(() => {
     axios
-      .get("/unseenNotificationsCount")
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/unseenNotificationsCount`
+      )
       .then((res) => {
         setUnseenNotificationsCount(res.data.count);
       })
@@ -62,7 +59,7 @@ const NavBar = (props) => {
     if (isNotificationOpen === false) {
       setLoading(true);
       axios
-        .get("/notifications")
+        .get(`https://anmolg27-social-app-server.herokuapp.com/notifications`)
         .then((res) => {
           setNotifications(res.data.reverse());
           setLoading(false);
@@ -129,7 +126,7 @@ const NavBar = (props) => {
   return (
     <Navbar className={navBarClasses.join(" ")} dark expand="md">
       <a className="navbar-brand " style={{ padding: "0px" }} href="/">
-        <img src="/images/my_logo.png" height={40} />
+        <img src="/images/my_logo.png" height={40} alt="logo" />
       </a>
 
       {props.user.authenticated && deviceWidth < 768 ? (

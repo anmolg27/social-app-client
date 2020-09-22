@@ -6,14 +6,7 @@ import beautifyName from "../../util/beautifyName";
 import "font-awesome/css/font-awesome.min.css";
 import { uploadAvatar } from "../../redux/actions/userActions";
 // import { Button } from "reactstrap";
-import {
-  Button,
-  Tooltip,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { Tooltip } from "reactstrap";
 
 const Profile = (props) => {
   const [modal, setModal] = useState(false);
@@ -41,7 +34,7 @@ const Profile = (props) => {
           `${props.UI.errors}.Please upload an image of size less than 100KB`
         );
       }
-      alert(props.UI.errors);
+      console.log(props.UI.errors);
     }
   }, [props.UI.errors]);
   const { name, age, email, _id, sex } = props.user.credentials;
@@ -62,6 +55,7 @@ const Profile = (props) => {
         width={150}
         style={{ cursor: "pointer" }}
         src="/images/no-profile.jpg"
+        alt="profile image"
       />
       <ImageModal show={modal} toggleModal={toggleModal}>
         <img
@@ -73,6 +67,7 @@ const Profile = (props) => {
                 }`
               : "/images/no-profile.jpg"
           }
+          alt="profile image"
         />
       </ImageModal>
 

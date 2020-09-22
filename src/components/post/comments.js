@@ -11,7 +11,7 @@ import { getAvatar } from "../../redux/actions/userActions";
 function Comments(props) {
   //   console.log(props.loading);
   const [comments, setComments] = useState(null);
-  const { socket, name, userId, loading, postId } = props;
+  const { socket, loading, postId } = props;
   useEffect(() => {
     if (props.loading === false) {
       socket.emit("joinCommentRoom", { postId });

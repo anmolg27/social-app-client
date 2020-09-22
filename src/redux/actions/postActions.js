@@ -2,9 +2,6 @@ import axios from "axios";
 import {
   SET_POSTS,
   DELETE_POST,
-  LOADING_UI,
-  SET_ERRORS,
-  CLEAR_ERRORS,
   UPDATE_COMMENTS_COUNT,
   OLD_POSTS,
   SET_LAST_POST_ID,
@@ -18,11 +15,10 @@ import {
   INITIALIZE_POSTS,
   UPDATE_LIKES,
 } from "../types";
-import { getAvatar } from "./userActions";
 export const createPost = (content) => (dispatch) => {
   dispatch({ type: CREATE_POST_LOADING });
   axios
-    .post("/posts", { content })
+    .post(`https://anmolg27-social-app-server.herokuapp.com/posts`, { content })
     .then((res) => {
       dispatch(getPosts());
     })
@@ -38,7 +34,7 @@ export const createPost = (content) => (dispatch) => {
 export const getPosts = () => (dispatch, getState) => {
   dispatch({ type: POSTS_LOADING });
   axios
-    .get(`/allposts`)
+    .get(`https://anmolg27-social-app-server.herokuapp.com/allposts`)
     .then((res) => {
       dispatch({ type: SET_POSTS, payload: res.data });
       // res.data.forEach((post) => {
@@ -66,7 +62,9 @@ export const getOldPosts = (postId) => (dispatch, getState) => {
   if (postId !== null) {
     dispatch({ type: OLD_POSTS_LOADING });
     axios
-      .get(`/allposts?postId=${postId}`)
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/allposts?postId=${postId}`
+      )
       .then((res) => {
         if (
           res.data.length !== 0 &&
@@ -104,7 +102,7 @@ export const getUserPosts = (userId) => (dispatch, getState) => {
   dispatch({ type: POSTS_LOADING });
 
   axios
-    .get(`/posts/${userId}`)
+    .get(`https://anmolg27-social-app-server.herokuapp.com/posts/${userId}`)
     .then((res) => {
       dispatch({ type: SET_POSTS, payload: res.data });
 
@@ -135,7 +133,9 @@ export const getOldUserPosts = (userId, postId) => (dispatch, getState) => {
     ) {
       dispatch({ type: OLD_POSTS_LOADING });
       axios
-        .get(`/posts/${userId}?postId=${postId}`)
+        .get(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${userId}?postId=${postId}`
+        )
         .then((res) => {
           console.log("old posts loading");
           console.log(
@@ -176,7 +176,7 @@ export const getOldUserPosts = (userId, postId) => (dispatch, getState) => {
 
 export const deletePost = (postId) => (dispatch) => {
   axios
-    .delete(`/posts/${postId}`)
+    .delete(`https://anmolg27-social-app-server.herokuapp.com/posts/${postId}`)
     .then((res) => {
       // console.log(res.data);
       dispatch({ type: DELETE_POST, payload: postId });

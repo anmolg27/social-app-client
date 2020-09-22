@@ -14,7 +14,7 @@ import axios from "axios";
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("/users", newUserData)
+    .post(`https://anmolg27-social-app-server.herokuapp.com/users`, newUserData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch({ type: SET_USER, payload: res.data.user });
@@ -43,7 +43,7 @@ export const logInUser = (data, history) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   dispatch({ type: LOADING_UI });
   axios
-    .post("/users/login", data)
+    .post(`https://anmolg27-social-app-server.herokuapp.com/users/login`, data)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getAvatar(res.data.user._id));
@@ -69,7 +69,7 @@ export const logInUser = (data, history) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get("/users/me")
+    .get(`https://anmolg27-social-app-server.herokuapp.com/users/me`)
     .then((res) => {
       dispatch(getAvatar(res.data._id));
       dispatch({ type: SET_USER, payload: res.data });
@@ -83,7 +83,7 @@ export const getUserData = () => (dispatch) => {
 
 export const getAvatar = (id) => (dispatch) => {
   axios
-    .get(`/users/${id}/avatar`)
+    .get(`https://anmolg27-social-app-server.herokuapp.com/users/${id}/avatar`)
     .then((res) => {
       // dispatch({ type: SET_AVATAR, payload: res.data });
       dispatch({ type: ADD_IMAGE, payload: res.data });
@@ -97,7 +97,10 @@ export const uploadAvatar = (formData) => (dispatch) => {
   // dispatch({ type: CLEAR_ERRORS });
   dispatch({ type: LOADING_UI });
   axios
-    .post("/users/me/avatar", formData)
+    .post(
+      `https://anmolg27-social-app-server.herokuapp.com/users/me/avatar`,
+      formData
+    )
     .then((res) => {
       dispatch({ type: SET_AVATAR, payload: res.data });
       dispatch({ type: ADD_IMAGE, payload: res.data });
@@ -112,15 +115,17 @@ export const uploadAvatar = (formData) => (dispatch) => {
 };
 
 export const logOutUser = (history) => (dispatch) => {
-  axios.post("/users/logout").then((res) => {
-    // console.log(res.data);
-    // localStorage.removeItem("IdToken");
-    // delete axios.defaults.headers.common["Authorization"];
-    // dispatch({ type: SET_UNAUTHENTICATED });
-    dispatch(unsetAuthorizationHeader());
-    // history.push("/signin");
-    dispatch({ type: CLEAR_POSTS });
-  });
+  axios
+    .post(`https://anmolg27-social-app-server.herokuapp.com/users/logout`)
+    .then((res) => {
+      // console.log(res.data);
+      // localStorage.removeItem("IdToken");
+      // delete axios.defaults.headers.common["Authorization"];
+      // dispatch({ type: SET_UNAUTHENTICATED });
+      dispatch(unsetAuthorizationHeader());
+      // history.push("/signin");
+      dispatch({ type: CLEAR_POSTS });
+    });
 };
 
 const unsetAuthorizationHeader = () => (dispatch) => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Row } from "reactstrap";
 import Profile from "./profile";
 import Wall from "./wall";
 import SideNav from "./sideNav";

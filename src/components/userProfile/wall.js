@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from "react";
-import { Input, Button, Collapse, CardBody, Card, Spinner } from "reactstrap";
+import React, { Component } from "react";
+import { Spinner } from "reactstrap";
 import Post from "./post";
 // Redux
 import {

@@ -15,7 +15,6 @@ function Post(props) {
   // console.log(props.UI.loading);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [comments, setComments] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const handleProfileClick = (post) => {
@@ -26,7 +25,9 @@ function Post(props) {
     if (isOpen === false) {
       setLoading(true);
       axios
-        .get(`/posts/${props.post._id}/comments?sortBy=createdAt:desc&limit=10`)
+        .get(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${props.post._id}/comments?sortBy=createdAt:desc&limit=10`
+        )
         .then((res) => {
           res.data.forEach((comment) => {
             const hasImage = props.images.find(
@@ -55,7 +56,9 @@ function Post(props) {
   const handleLike = () => {
     if (!liked) {
       axios
-        .post(`/posts/${props.post._id}/like`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${props.post._id}/like`
+        )
         .then(() => {
           setLiked(true);
         })
@@ -64,7 +67,9 @@ function Post(props) {
         });
     } else {
       axios
-        .post(`/posts/${props.post._id}/unlike`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${props.post._id}/unlike`
+        )
         .then(() => {
           setLiked(false);
         })
@@ -79,7 +84,9 @@ function Post(props) {
 
   useEffect(() => {
     axios
-      .get(`/posts/${props.post._id}/isLiked`)
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/posts/${props.post._id}/isLiked`
+      )
       .then((res) => {
         if (res.data.liked === true) setLiked(true);
         else setLiked(false);

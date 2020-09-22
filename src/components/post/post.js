@@ -11,7 +11,7 @@ function Post(props) {
   const [post, setPost] = useState({});
   const [postLoading, setPostLoading] = useState(false);
   const [commentsLoading, setCommentsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
   console.log(comments);
@@ -22,7 +22,7 @@ function Post(props) {
     setCommentsLoading(true);
     axios
       .get(
-        `/posts/${props.paramPostId}/comments?sortBy=createdAt:desc&limit=10`
+        `https://anmolg27-social-app-server.herokuapp.com/posts/${props.paramPostId}/comments?sortBy=createdAt:desc&limit=10`
       )
       .then((res) => {
         res.data.forEach((comment) => {
@@ -46,7 +46,9 @@ function Post(props) {
   useEffect(() => {
     setPostLoading(true);
     axios
-      .get(`/singlePost/${props.paramPostId}`)
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/singlePost/${props.paramPostId}`
+      )
       .then((res) => {
         console.log(res.data._doc);
         setPostLoading(false);
@@ -57,18 +59,20 @@ function Post(props) {
         if (!tempAva) props.getAvatar(res._doc.ownerId);
       })
       .catch((e) => {
-        setError("Something went wrong! Please try again later");
+        // setError("Something went wrong! Please try again later");
       });
     return () => {
       setPost({});
-      setError(null);
+      // setError(null);
       setPostLoading(false);
       setCommentsLoading(false);
     };
   }, [props.paramPostId]);
   useEffect(() => {
     axios
-      .get(`/posts/${props.paramPostId}/isLiked`)
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/posts/${props.paramPostId}/isLiked`
+      )
       .then((res) => {
         if (res.data.liked === true) setLiked(true);
         else setLiked(false);
@@ -88,7 +92,9 @@ function Post(props) {
   const handleLike = (postId) => {
     if (!liked) {
       axios
-        .post(`/posts/${postId}/like`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${postId}/like`
+        )
         .then(() => {
           setLiked(true);
         })
@@ -97,7 +103,9 @@ function Post(props) {
         });
     } else {
       axios
-        .post(`/posts/${postId}/unlike`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/posts/${postId}/unlike`
+        )
         .then(() => {
           setLiked(false);
         })

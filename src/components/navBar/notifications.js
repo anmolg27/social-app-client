@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import beautifyName from "../../util/beautifyName";
 import moment from "moment";
 import axios from "axios";
@@ -11,7 +11,9 @@ import { setFriends } from "../../redux/actions/friendsActions";
 function Notifications(props) {
   useEffect(() => {
     axios
-      .patch("/notifications/seen")
+      .patch(
+        `https://anmolg27-social-app-server.herokuapp.com/notifications/seen`
+      )
       .then((res) => {
         // console.log("success");
         props.setUnseenNotificationsCount(0);
@@ -30,7 +32,9 @@ function Notifications(props) {
   const handleFriendRequest = (event, notification, response) => {
     if (response === true) {
       axios
-        .post(`/friends/${notification.recipientId}/respond?accept=${response}`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/friends/${notification.recipientId}/respond?accept=${response}`
+        )
         .then((res) => {
           props.setFriends(res.data);
         })
@@ -38,7 +42,9 @@ function Notifications(props) {
       event.target.parentElement.parentElement.innerHTML = `<h5>You and ${notification.recipientName} are now Friends!</h5>`;
     } else if (response === false) {
       axios
-        .post(`/friends/${notification.recipientId}/respond?accept=${response}`)
+        .post(
+          `https://anmolg27-social-app-server.herokuapp.com/friends/${notification.recipientId}/respond?accept=${response}`
+        )
         .then((res) => {
           props.setFriends(res.data);
         })

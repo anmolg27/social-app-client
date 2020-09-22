@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import beautifyName from "../../util/beautifyName";
 import {
   ButtonDropdown,
@@ -18,14 +18,7 @@ import {
 } from "../../redux/actions/friendsActions";
 import { getAvatar } from "../../redux/actions/userActions";
 // import { Button } from "reactstrap";
-import {
-  Button,
-  Tooltip,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { Button, Tooltip, ModalBody, ModalFooter } from "reactstrap";
 
 const Profile = (props) => {
   const [modal, setModal] = useState(false);
@@ -35,8 +28,6 @@ const Profile = (props) => {
   const toggle = () => setTooltipOpen(!tooltipOpen);
 
   const [dropdownOpen, setOpen] = useState(false);
-
-  const toggleDropDown = () => setOpen(!dropdownOpen);
 
   const [unfriendModal, setUnfriendModal] = useState(false);
   const toggleUnfriendModal = () => setUnfriendModal(!unfriendModal);
@@ -217,6 +208,7 @@ const Profile = (props) => {
               ? `data:image/jpeg;base64,${ava.image}`
               : "/images/no-profile.jpg"
           }
+          alt="profile image"
         />
         <ImageModal show={modal} toggleModal={toggleModal}>
           <img
@@ -229,6 +221,7 @@ const Profile = (props) => {
                   }`
                 : "/images/no-profile.jpg")
             }
+            alt="profile image"
           />
         </ImageModal>
         <div className=" profile-details mt-2">

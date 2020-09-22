@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import beautifyName from "../../util/beautifyName";
 import "./styles.css";
-import history from "../../history";
 import axios from "axios";
 import SideNav from "../home/sideNav";
 import UnfriendModal from "./unfriendModal";
@@ -12,7 +11,6 @@ import {
   DropdownItem,
   Spinner,
   Button,
-  Modal,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
@@ -27,7 +25,6 @@ import { getAvatar } from "../../redux/actions/userActions";
 import queryString from "query-string";
 function SearchRes(props) {
   const [dropdownOpen, setOpen] = useState(false);
-  const toggleDropDown = () => setOpen(!dropdownOpen);
 
   const [modal, setModal] = useState(false);
 
@@ -48,7 +45,9 @@ function SearchRes(props) {
       if (containerHeight <= scrollOffset && temp) {
         setBottomLoading(true);
         axios
-          .get(`/users/search?q=${q}&userId=${temp}`)
+          .get(
+            `https://anmolg27-social-app-server.herokuapp.com/users/search?q=${q}&userId=${temp}`
+          )
           .then((res) => {
             setUsers((prev) => [...prev, ...res.data]);
             if (res.data.length === 10) {
@@ -70,7 +69,9 @@ function SearchRes(props) {
     // console.log(q);
     setLoading(true);
     axios
-      .get(`/users/search?q=${q}`)
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/users/search?q=${q}`
+      )
       .then((res) => {
         setUsers(res.data);
         setLoading(false);

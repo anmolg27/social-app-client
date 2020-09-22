@@ -10,7 +10,7 @@ import { getAvatar } from "../../redux/actions/userActions";
 
 function Comments(props) {
   const [comments, setComments] = useState(null);
-  const { socket, name, userId, loading, postId } = props;
+  const { socket, loading, postId } = props;
   const handleProfileClick = (comment) => {
     window.location.href = `/user/${comment.ownerId}`;
   };

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import io from "socket.io-client";
 
@@ -23,7 +23,7 @@ import Friends from "./components/friends/friends";
 import AuthRoute from "./util/AuthRoute";
 import AuthRouteSignUpOrIn from "./util/AuthRouteSignUpOrIn";
 
-const END_POINT = "http://localhost:4000";
+const END_POINT = "https://anmolg27-social-app-server.herokuapp.com";
 let socket;
 socket = io(END_POINT);
 function App(props) {
@@ -34,7 +34,7 @@ function App(props) {
         "isOnline",
         { name, id: _id, token: localStorage.IdToken },
         (error) => {
-          if (error) alert(error.message);
+          if (error) console.log(error);
         }
       );
     }

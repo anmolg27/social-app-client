@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import { connect } from "react-redux";
 import SideNav from "../home/sideNav";
-import { Row, Col } from "reactstrap";
+import { Row } from "reactstrap";
 import Wall from "./wall";
 import Profile from "./profile";
 
@@ -13,9 +13,13 @@ import { getAvatar } from "../../redux/actions/userActions";
 function UserProfile(props) {
   const [user, setUser] = useState({ credentials: null });
   useEffect(() => {
-    axios.get(`/users/${props.paramUserId}`).then((res) => {
-      setUser({ credentials: res.data });
-    });
+    axios
+      .get(
+        `https://anmolg27-social-app-server.herokuapp.com/users/${props.paramUserId}`
+      )
+      .then((res) => {
+        setUser({ credentials: res.data });
+      });
     props.getAvatar(props.paramUserId);
   }, []);
   // console.log(props.match.params);

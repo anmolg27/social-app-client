@@ -134,7 +134,7 @@ class SignUp extends Component {
     this.props.clearErrors();
   }
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <div className="signup-container">
         <h2 className="signup-heading">SignUp</h2>
