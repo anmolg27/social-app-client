@@ -15,3 +15,21 @@
   background-color: forestgreen;
   transition: background-color 0.5s;
 }
+.btn-radio {
+  line-height: 30px;
+  /* vertical-align: center; */
+  height: 50px;
+  /* border: solid black 3px; */
+  /* margin-right: 3px; */
+}
+.btn-radio:hover {
+  /* font-size: 30px; */
+  background-color: rgb(104, 104, 104);
+  transition: font-size 0.2s, background-color 1s;
+}
+.gender-checked {
+  letter-spacing: 4px;
+  font-size: 30px;
+  /* background-color: darkorange; */
+  /* transition: font-size 0.3s; */
+}

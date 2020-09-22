@@ -8,27 +8,21 @@ import "./styles.css";
 
 // Redux
 import { connect } from "react-redux";
-// import store from "./redux/store";
-// import { SET_AUTHENTICATED } from "./redux/types";
-// import { getUserData } from "./redux/actions/userActions";
-
+import { getFriends } from "./redux/actions/friendsActions";
 // components
 import Home from "./components/home/home";
 import SignUp from "./components/signUp/signUp";
 import SignIn from "./components/signIn/signIn";
 import NavBar from "./components/navBar/NavBar";
+import SearchRes from "./components/searchResults/searchRes";
+import UserProfile from "./components/userProfile/userProfile";
+import Post from "./components/post/post";
+import Friends from "./components/friends/friends";
 
 // utils
 import AuthRoute from "./util/AuthRoute";
 import AuthRouteSignUpOrIn from "./util/AuthRouteSignUpOrIn";
 
-// const token = localStorage.IdToken;
-// if (token) {
-//   const decodedToken = jwtDecode(token);
-//   // store.dispatch({ type: SET_AUTHENTICATED });
-//   axios.defaults.headers.common["Authorization"] = token;
-//   store.dispatch(getUserData());
-// }
 const END_POINT = "http://localhost:4000";
 let socket;
 socket = io(END_POINT);
@@ -36,20 +30,50 @@ function App(props) {
   const { authenticated, name, _id } = props;
   useEffect(() => {
     if (authenticated === true) {
-      socket.emit("isOnline", { name, id: _id }, (error) => {
-        if (error) alert(error.message);
-      });
-      console.log(localStorage.IdToken);
+      socket.emit(
+        "isOnline",
+        { name, id: _id, token: localStorage.IdToken },
+        (error) => {
+          if (error) alert(error.message);
+        }
+      );
     }
     return () => {
       socket.emit("disconnect");
       socket.off();
     };
   }, [END_POINT, name, authenticated]);
+  useEffect(() => {
+    if (authenticated) {
+      props.getFriends();
+    }
+  }, [authenticated]);
   return (
     <div className="App">
       <NavBar socket={socket} />
       <Switch>
+        <Route path="/search" component={SearchRes} />
+        <Route
+          path="/post/:postId"
+          component={(props) => (
+            <Post socket={socket} paramPostId={props.match.params.postId} />
+          )}
+        />
+        <AuthRoute
+          path="/user/:userId"
+          component={(props) => (
+            <UserProfile
+              socket={socket}
+              paramUserId={props.match.params.userId}
+            />
+          )}
+        />
+        <AuthRoute
+          exact
+          path="/friends"
+          component={() => <Friends socket={socket} />}
+        />
+
         <AuthRoute exact path="/" component={() => <Home socket={socket} />} />
         <AuthRouteSignUpOrIn exact path="/signup" component={SignUp} />
         <AuthRouteSignUpOrIn exact path="/signin" component={SignIn} />
@@ -62,4 +86,4 @@ const mapStateToProps = (state) => ({
   name: state.user.credentials.name,
   _id: state.user.credentials._id,
 });
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { getFriends })(App);

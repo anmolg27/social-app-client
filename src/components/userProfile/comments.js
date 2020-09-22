@@ -3,7 +3,6 @@ import beautifyName from "../../util/beautifyName";
 import moment from "moment";
 import { Input, Button } from "reactstrap";
 import ScrollToBottom from "react-scroll-to-bottom";
-// import ScrollToBottom from "react-scroll-to-bottom";
 
 import { connect } from "react-redux";
 import { updateCommentsCount } from "../../redux/actions/postActions";
@@ -12,6 +11,9 @@ import { getAvatar } from "../../redux/actions/userActions";
 function Comments(props) {
   const [comments, setComments] = useState(null);
   const { socket, name, userId, loading, postId } = props;
+  const handleProfileClick = (comment) => {
+    window.location.href = `/user/${comment.ownerId}`;
+  };
   useEffect(() => {
     if (props.loading === false) {
       socket.emit("joinCommentRoom", { postId });
@@ -33,9 +35,7 @@ function Comments(props) {
       }
     });
   }, [comments]);
-  const handleProfileClick = (comment) => {
-    window.location.href = `/user/${comment.ownerId}`;
-  };
+
   if (props.loading === true) {
     return (
       <div className="loading">
@@ -60,8 +60,8 @@ function Comments(props) {
         return (
           <div className="comment media my-2 col-md-10 col-11">
             <img
-              style={{ cursor: "pointer" }}
               onClick={() => handleProfileClick(comment)}
+              style={{ cursor: "pointer" }}
               height={60}
               src={
                 ava
@@ -74,8 +74,8 @@ function Comments(props) {
             <div className="media-body">
               <div className="comment-name-time">
                 <h5
-                  style={{ cursor: "pointer" }}
                   onClick={() => handleProfileClick(comment)}
+                  style={{ cursor: "pointer" }}
                   className="mt-0 mb-1 comment-user-name"
                 >
                   {beautifyName(comment.ownerName)}

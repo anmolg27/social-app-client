@@ -1,0 +1,56 @@
+.friends-data {
+  background-color: rgb(222, 243, 226);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.pending-requests-button {
+  background-color: rgb(238, 238, 238);
+  border: none;
+  border: solid 1px rgb(139, 139, 139);
+  border-radius: 5px;
+}
+.friend-requests-button {
+  background-color: rgb(238, 238, 238);
+  border: none;
+  margin-left: 10px;
+  border: solid 1px rgb(139, 139, 139);
+  border-radius: 5px;
+}
+.friend-requests-button:hover,
+.pending-requests-button:hover,
+.friend-requests-button:active,
+.pending-requests-button:active {
+  background-color: rgb(194, 235, 208);
+  transition: background-color 0.5s;
+}
+.request-buttons-group {
+  padding-top: 30px;
+}
+.friend-list-container {
+  background-image: linear-gradient(
+    rgba(0, 255, 0, 0.486),
+    rgba(88, 217, 226, 0.651)
+  );
+  border-radius: 15px;
+  padding: 30px 5px;
+  /* color: rgb(141, 124, 27); */
+}
+.friends-list {
+  max-height: 70vh;
+  /* height: 70vh; */
+  overflow-y: scroll;
+
+  /* background-color: rgb(178, 235, 88); */
+}
+.friends-list::-webkit-scrollbar {
+  width: 5px;
+}
+.friends-list::-webkit-scrollbar-track {
+  /* box-shadow: none; */
+}
+.user-friend {
+  padding-bottom: 25px;
+  height: min-content;
+  /* align-items: center; */
+}

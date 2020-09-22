@@ -15,6 +15,7 @@ function Post(props) {
   // console.log(props.UI.loading);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [comments, setComments] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const handleProfileClick = (post) => {
@@ -50,6 +51,7 @@ function Post(props) {
   const handleDelete = () => {
     props.deletePost(props.post._id);
   };
+
   const handleLike = () => {
     if (!liked) {
       axios
@@ -74,6 +76,7 @@ function Post(props) {
   useEffect(() => {
     setIsOpen(false);
   }, [props.post]);
+
   useEffect(() => {
     axios
       .get(`/posts/${props.post._id}/isLiked`)
@@ -125,7 +128,7 @@ function Post(props) {
             )}
           </div>
           <p className="post-content">{props.post.content}</p>
-
+          {/* {props.post.content} */}
           <br />
           <button
             onClick={toggle}

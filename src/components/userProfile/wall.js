@@ -4,11 +4,10 @@ import Post from "./post";
 // Redux
 import {
   createPost,
-  getPosts,
-  getOldPosts,
+  getUserPosts,
+  getOldUserPosts,
   initializePosts,
 } from "../../redux/actions/postActions";
-import { getAvatar } from "../../redux/actions/userActions";
 import { connect } from "react-redux";
 class Wall extends Component {
   state = {
@@ -17,7 +16,7 @@ class Wall extends Component {
     scrollTop: undefined,
   };
   componentDidMount() {
-    this.props.getPosts(null);
+    this.props.getUserPosts(this.props.paramUserId);
   }
   componentWillUpdate() {
     window.addEventListener("scroll", () => {
@@ -36,15 +35,16 @@ class Wall extends Component {
           !this.props.posts.oldPostsLoading
         ) {
           // console.log("scrolled to bottom " + this.props.posts.lastPostId);
-          this.props.getOldPosts(this.props.posts.lastPostId);
+          this.props.getOldUserPosts(
+            this.props.paramUserId,
+            this.props.posts.lastPostId
+          );
         }
       }
     });
   }
-  async componentWillUnmount() {
+  componentWillUnmount() {
     this.props.initializePosts();
-    // console.log("unmounting from home");
-    // await console.log(this.props.posts);
   }
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -65,13 +65,11 @@ class Wall extends Component {
     let postsHtml;
     if (this.props.posts.postsList.length > 0) {
       postsHtml = this.props.posts.postsList.map((post) => {
-        const ava = this.props.images.find(
-          (cur) => cur.userId === post.ownerId
-        );
-        // console.log(ava);
-        if (!ava) {
-          this.props.getAvatar(post.ownerId);
+        let ava = null;
+        if (this.props.images.length > 0) {
+          ava = this.props.images.find((cur) => cur.userId === post.ownerId);
         }
+
         return <Post post={post} ava={ava} socket={this.props.socket} />;
       });
       return postsHtml;
@@ -112,35 +110,8 @@ class Wall extends Component {
     }
   };
   render() {
-    const handlePost = () => {
-      const text = document.querySelector(".input-textarea").value;
-      if (text) {
-        this.props.createPost(text);
-      }
-      document.querySelector(".input-textarea").value = "";
-    };
     return (
       <div className="wall-block">
-        <div className="input-post row">
-          <textarea
-            style={{ height: 100 }}
-            type="textarea"
-            className="input-textarea col-md-9 col-9"
-            placeholder="Write anything you like :)"
-          />
-          <div className="col-2 p-0 ml-2 align-self-center">
-            <Button className="post-button" onClick={handlePost}>
-              {this.props.posts.createPostLoading === true ? (
-                <div className="spinner-border text-success" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              ) : (
-                "Post"
-              )}
-            </Button>
-          </div>
-        </div>
-
         <ul className="list-unstyled mt-2 row mr-1 mr-md-0">
           {this.renderPosts()}
           {this.renderFooter()}
@@ -157,8 +128,7 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, {
   createPost,
-  getPosts,
-  getOldPosts,
+  getUserPosts,
+  getOldUserPosts,
   initializePosts,
-  getAvatar,
 })(Wall);

@@ -6,6 +6,8 @@ import userReducer from "./reducers/userReducer";
 import uiReducer from "./reducers/uiReducer";
 import postsReducer from "./reducers/postsReducer";
 import imagesReducer from "./reducers/imagesReducer";
+import friendsReducer from "./reducers/friendsReducer";
+import openedUserReducer from "./reducers/openedUserReducer";
 
 const initialState = {};
 const middleware = [thunk];
@@ -15,6 +17,8 @@ const reducers = combineReducers({
   posts: postsReducer,
   form: formReducer,
   images: imagesReducer,
+  friendsData: friendsReducer,
+  openedUser: openedUserReducer,
 });
 
 const store = createStore(

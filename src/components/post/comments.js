@@ -3,13 +3,13 @@ import beautifyName from "../../util/beautifyName";
 import moment from "moment";
 import { Input, Button } from "reactstrap";
 import ScrollToBottom from "react-scroll-to-bottom";
-// import ScrollToBottom from "react-scroll-to-bottom";
 
 import { connect } from "react-redux";
-import { updateCommentsCount } from "../../redux/actions/postActions";
+// import { updateCommentsCount } from "../../redux/actions/postActions";
 import { getAvatar } from "../../redux/actions/userActions";
 
 function Comments(props) {
+  //   console.log(props.loading);
   const [comments, setComments] = useState(null);
   const { socket, name, userId, loading, postId } = props;
   useEffect(() => {
@@ -23,19 +23,18 @@ function Comments(props) {
       };
     }
   }, [props.comments, loading]);
-
+  //   console.log(comments);
   useEffect(() => {
     socket.on("newComment", async (newComment) => {
       if (comments && newComment.postId === postId) {
-        const temp = [...comments, newComment];
-        await setComments([...comments, newComment]);
+        let temp = [...comments, newComment];
+        console.log("temp length is " + temp.length);
+        setComments([...comments, newComment]);
         props.updateCommentsCount(postId, temp.length);
       }
     });
   }, [comments]);
-  const handleProfileClick = (comment) => {
-    window.location.href = `/user/${comment.ownerId}`;
-  };
+
   if (props.loading === true) {
     return (
       <div className="loading">
@@ -60,8 +59,6 @@ function Comments(props) {
         return (
           <div className="comment media my-2 col-md-10 col-11">
             <img
-              style={{ cursor: "pointer" }}
-              onClick={() => handleProfileClick(comment)}
               height={60}
               src={
                 ava
@@ -73,11 +70,7 @@ function Comments(props) {
             />
             <div className="media-body">
               <div className="comment-name-time">
-                <h5
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleProfileClick(comment)}
-                  className="mt-0 mb-1 comment-user-name"
-                >
+                <h5 className="mt-0 mb-1 comment-user-name">
                   {beautifyName(comment.ownerName)}
                 </h5>
                 <p className="time-teller">{`${moment(
@@ -138,6 +131,4 @@ const mapStateToProps = (state) => ({
   userId: state.user.credentials._id,
 });
 
-export default connect(mapStateToProps, { updateCommentsCount, getAvatar })(
-  Comments
-);
+export default connect(mapStateToProps, { getAvatar })(Comments);

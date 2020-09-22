@@ -1,0 +1,119 @@
+.loading-search {
+  width: 100vw;
+  margin-top: 50px;
+  font-size: 40px;
+  text-align: center;
+  /* transform: translateX(50%); */
+  /* align-content: center; */
+}
+.search-container {
+  /* margin-left: 10px; */
+  width: 100vw;
+}
+.search-list {
+  width: 100%;
+  margin: auto 20px;
+}
+.search-user-image {
+  border-radius: 10px;
+}
+.search-user {
+  margin: 10px 0px;
+  /* margin: 10px auto; */
+  padding: 10px;
+  background-image: linear-gradient(
+    rgba(96, 209, 96, 0.486),
+    rgba(164, 201, 204, 0.651)
+  );
+  border-radius: 20px;
+  border: solid;
+  border-color: rgba(0, 0, 0, 0.13);
+}
+
+.send-request-icon {
+  color: rgb(2, 99, 99);
+  grid-gap: 5px;
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  top: 35px;
+  right: 10px;
+}
+/* .send-request-icon span {
+  display: none;
+} */
+.send-request-icon:hover {
+  background-color: rgba(160, 204, 233, 0.514);
+  transition: width 2s, background-color 0.5s;
+}
+/* .send-request-icon:hover span {
+  display: inline;
+} */
+.unsend-request-icon {
+  padding: 0 5px;
+  background-color: rgba(120, 202, 120, 0.664);
+  color: rgb(23, 121, 4);
+  grid-gap: 5px;
+  display: flex;
+  /* background: none; */
+  border-radius: 5px;
+  border: none;
+  position: absolute;
+  top: 35px;
+  right: 10px;
+}
+/* .unsend-request-icon span {
+  display: none;
+} */
+/* .unsend-request-icon:hover {
+  background-color: rgba(223, 169, 169, 0.514);
+  transition: width 2s, background-color 0.5s;
+} */
+/* .unsend-request-icon:hover span {
+  display: inline;
+} */
+.showUnfriendModal {
+  text-align: -webkit-center;
+  z-index: 9999;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0.1, 0.1, 0.1, 0.4);
+  top: 0%;
+  left: 0%;
+  padding-top: 5%;
+  display: block;
+  animation-name: unfriendModal;
+  animation-duration: 1s;
+  /* transition: display 1s; */
+}
+@keyframes unfriendModal {
+  from {
+    opacity: 0;
+    /* width: 0vw; */
+    /* height: 0vh; */
+    /* scale: 0; */
+  }
+  to {
+    opacity: 1;
+    /* scale: 1; */
+    /* width: 100vw; */
+    /* height: 100vh; */
+  }
+}
+.hideUnfriendModal {
+  display: none;
+}
+.unfriend-modal-main {
+  padding-bottom: 0.5%;
+  width: fit-content;
+  height: auto;
+
+  border-radius: 5px;
+  background-color: rgb(219, 219, 219);
+}
+.unfriend-modal-main i {
+  cursor: pointer;
+}

@@ -6,20 +6,41 @@ export const CLEAR_USER = "CLEAR_USER";
 export const SET_AVATAR = "SET_AVATAR";
 export const UNSET_AVATAR = "UNSET_AVATAR";
 
+// OPENED USER
+export const SET_OPENED_USER = "SET_OPENED_USER";
+
 // UI
 export const SET_ERRORS = "SET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const LOADING_UI = "LOADING_UI";
 
 // POSTS
-export const LOADING_POSTS = "LOADING_POSTS";
+// export const LOADING_POSTS = "LOADING_POSTS";
 export const SET_POSTS = "SET_POSTS";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const CLEAR_POSTS = "CLEAR_POSTS";
+export const OLD_POSTS = "OLD_POSTS";
+export const SET_LAST_POST_ID = "SET_LAST_POST_ID";
+export const CREATE_POST_LOADING = "CREATE_POST_LOADING";
+export const CREATE_POST_ERROR = "CREATE_POST_ERROR";
+export const POSTS_LOADING = "POSTS_LOADING";
+export const POSTS_ERROR = "POSTS_ERROR";
+export const OLD_POSTS_LOADING = "OLD_POSTS_LOADING";
+export const OLD_POST_ERROR = "OLD_POST_ERROR";
+export const STOP_OLD_POSTS_LOADING = "STOP_OLD_POSTS_LOADING";
+export const INITIALIZE_POSTS = "INITIALIZE_POSTS";
+export const UPDATE_LIKES = "UPDATE_LIKES";
 
 // Comments
 export const UPDATE_COMMENTS_COUNT = "UPDATE_COMMENTS_COUNT";
 
 // IMAGES
 export const ADD_IMAGE = "ADD_IMAGE";
+
+// FRIENDS
+export const GET_FRIENDS = "GET_FRIENDS";
+export const FRIENDS_LOADING = "FRIENDS_LOADING";
+export const SEND_REQUEST_LOADING = "SEND_REQUEST_LOADING";
+// export const SEND_REQUEST_ERROR = "SEND_REQUEST_ERROR";
+export const STOP_SEND_REQUEST_LOADING = "STOP_SEND_REQUEST_LOADING";

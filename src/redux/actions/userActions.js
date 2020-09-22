@@ -22,7 +22,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
-      if (err.response.status === 500) {
+      if (err.response && err.response.status === 500) {
         dispatch({
           type: SET_ERRORS,
           payload: "Server is down. Please try again later :(",
@@ -52,7 +52,7 @@ export const logInUser = (data, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
-      if (err.response.status === 500) {
+      if (err.response && err.response.status === 500) {
         dispatch({
           type: SET_ERRORS,
           payload: "There is an internal server error. Please try again :(",
@@ -76,12 +76,8 @@ export const getUserData = () => (dispatch) => {
     })
     .catch((err) => {
       // console.log(err.response.status);
-      console.log(err);
-      if (err.response.status === 401) {
-        dispatch(unsetAuthorizationHeader());
-      } else if (err.response.status === 500) {
-        alert("Internal server error! Please try again later :(");
-      }
+      // console.log(err);
+      dispatch(unsetAuthorizationHeader());
     });
 };
 
@@ -115,13 +111,14 @@ export const uploadAvatar = (formData) => (dispatch) => {
     });
 };
 
-export const logOutUser = () => (dispatch) => {
-  axios.post("users/logout").then((res) => {
+export const logOutUser = (history) => (dispatch) => {
+  axios.post("/users/logout").then((res) => {
     // console.log(res.data);
     // localStorage.removeItem("IdToken");
     // delete axios.defaults.headers.common["Authorization"];
     // dispatch({ type: SET_UNAUTHENTICATED });
     dispatch(unsetAuthorizationHeader());
+    // history.push("/signin");
     dispatch({ type: CLEAR_POSTS });
   });
 };
